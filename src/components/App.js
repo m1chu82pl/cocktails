@@ -24,32 +24,32 @@ class App extends React.Component {
     //   drinkInstructionsEN: "",
     //   drinkInstructionsDE: "",
   };
-  
+
   handleChangeInputValue = (event) => {
     this.setState({
       drinkName: event.target.value,
     });
   };
-  
+
   handleDrinkSubmit = (event) => {
     // console.log(this.state.drinkValue);
     event.preventDefault();
     const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.state.drinkName}`;
-    
+
     fetch(URL)
-    .then((response) => {
-      if (response.ok) {
-        console.log(response);
-        return response;
-      }
-      throw Error("coś poszło nie tak");
-    })
-    .then((response) => response.json())
-    .then((cocktails) => {
-      // console.log(data);
-      // console.log(cocktails.drinks[0].strDrink);
-      console.log(cocktails.drinks);
-      this.setState({ cocktails: cocktails.drinks });
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          return response;
+        }
+        throw Error("coś poszło nie tak");
+      })
+      .then((response) => response.json())
+      .then((cocktails) => {
+        // console.log(data);
+        // console.log(cocktails.drinks[0].strDrink);
+        console.log(cocktails.drinks);
+        this.setState({ cocktails: cocktails.drinks });
       })
       .catch((error) => {
         console.log(error);
@@ -57,20 +57,23 @@ class App extends React.Component {
           error: true,
         });
       });
-      
-      this.setState({
-        drinkName: "",
-      });
-    };
-    
-    render() {
-      const cocktails = this.state.cocktails.map(cocktail => (
-          <div key={cocktail.idDrink}>{cocktail.strDrink}</div>
-        ));
-        console.log(this.state.cocktails);
-        
-        return (
-          <div className="App">
+
+    this.setState({
+      drinkName: "",
+    });
+  };
+
+  render() {
+    const cocktails = this.state.cocktails.map((cocktail) => (
+      <div className="imgContainer">
+        <img src={cocktail.strDrinkThumb} alt="drink" />
+        <div key={cocktail.idDrink}>{cocktail.strDrink}</div>
+      </div>
+    ));
+    // console.log(this.state.cocktails);
+
+    return (
+      <div className="App">
         <RandomDrink />
         "This is cocktails webside"
         <Form
@@ -78,9 +81,11 @@ class App extends React.Component {
           change={this.handleChangeInputValue}
           submit={this.handleDrinkSubmit}
         />
-        <Drink drinkData={this.state} />
-        {/* {Drinks} */}
-        {cocktails}
+        <div className="flexContainer">
+          {/* <Drink drinkData={this.state} /> */}
+          {/* {Drinks} */}
+          {cocktails}
+        </div>
       </div>
     );
   }
