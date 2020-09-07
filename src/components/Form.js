@@ -8,7 +8,7 @@ const Form = (props) => {
           type="text"
           name=""
           id=""
-          placeholder="hold my beer"
+          placeholder="search by name"
           onChange={props.change}
           value={props.value}
         />

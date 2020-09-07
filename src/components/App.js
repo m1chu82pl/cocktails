@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Drink from "./Drink";
+import DrinksByName from "./DrinksByName";
 import RandomDrink from "./RandomDrink";
 import Form from "./Form";
 
@@ -64,13 +64,15 @@ class App extends React.Component {
   };
 
   render() {
-    const cocktails = this.state.cocktails.map((cocktail) => (
-      <div className="imgContainer">
-        <img src={cocktail.strDrinkThumb} alt="drink" />
-        <div key={cocktail.idDrink}>{cocktail.strDrink}</div>
-      </div>
-    ));
+    // const cocktails = this.state.cocktails.map((cocktail) => (
+    //   <div className="imgContainer">
+    //     <img src={cocktail.strDrinkThumb} alt="drink" />
+    //     <div key={cocktail.idDrink}>{cocktail.strDrink}</div>
+    //   </div>
+    // ));
     // console.log(this.state.cocktails);
+
+    const cocktails = this.state.cocktails;
 
     return (
       <div className="App">
@@ -82,9 +84,9 @@ class App extends React.Component {
           submit={this.handleDrinkSubmit}
         />
         <div className="flexContainer">
-          {/* <Drink drinkData={this.state} /> */}
+          {cocktails ? <DrinksByName cocktails={cocktails} /> : cocktails}
           {/* {Drinks} */}
-          {cocktails}
+          {/* {cocktails} */}
         </div>
       </div>
     );
