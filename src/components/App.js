@@ -73,6 +73,10 @@ class App extends React.Component {
     });
   };
 
+  handleClickOnRandomDrink = () => {
+
+  }
+
   render() {
     // const cocktails = this.state.cocktails.map((cocktail) => (
     //   <div className="imgContainer">
@@ -91,6 +95,7 @@ class App extends React.Component {
           randomDrink={this.state.randomDrink}
           randomDrinkName={this.state.randomDrinkName}
           randomDrinkInstructions={this.state.randomDrinkInstructions}
+          click={this.handleClickOnRandomDrink}
         />
         <Form
           value={this.state.drinkName}
