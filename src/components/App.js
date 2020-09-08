@@ -3,6 +3,7 @@ import "./App.css";
 import DrinksByName from "./DrinksByName";
 import RandomDrink from "./RandomDrink";
 import Form from "./Form";
+import DrinkShow from "./DrinkShow";
 
 class App extends React.Component {
   state = {
@@ -11,6 +12,7 @@ class App extends React.Component {
     randomDrink: "",
     randomDrinkName: "",
     randomDrinkInstructions: "",
+    drinkShow: false,
     error: false,
   };
 
@@ -20,7 +22,7 @@ class App extends React.Component {
     });
   };
 
-  componentDidMount() {
+  showRandomDrink() {
     const URL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 
     fetch(URL)
@@ -39,6 +41,13 @@ class App extends React.Component {
           randomDrinkInstructions: randomDrink.drinks[0].strInstructions,
         });
       });
+  }
+
+  componentDidMount() {
+    setInterval(
+      () => this.showRandomDrink(),
+      3000
+    );
   }
 
   handleDrinkSubmit = (event) => {
@@ -74,8 +83,16 @@ class App extends React.Component {
   };
 
   handleClickOnRandomDrink = () => {
+    this.setState({
+      drinkShow: true,
+    });
+  };
 
-  }
+  handleCloseDrinkShowWindow = () => {
+    this.setState({
+      drinkShow: !this.state.drinkShow,
+    });
+  };
 
   render() {
     // const cocktails = this.state.cocktails.map((cocktail) => (
@@ -87,6 +104,7 @@ class App extends React.Component {
     // console.log(this.state.cocktails);
 
     const cocktails = this.state.cocktails;
+    const drinkShow = this.state.drinkShow;
 
     return (
       <div className="App">
@@ -103,11 +121,26 @@ class App extends React.Component {
           submit={this.handleDrinkSubmit}
         />
         <div className="flexContainer">
-          {cocktails ? <DrinksByName cocktails={cocktails} /> : cocktails}
+          {cocktails ? (
+            <DrinksByName
+              cocktails={cocktails}
+              click={this.handleCloseDrinkShowWindow}
+            />
+          ) : (
+            cocktails
+          )}
           {/* <DrinksByName cocktails={cocktails}/> */}
           {/* {Drinks} */}
           {/* {cocktails} */}
         </div>
+        {drinkShow ? (
+          <DrinkShow
+            drinkShow={drinkShow}
+            click={this.handleCloseDrinkShowWindow}
+          />
+        ) : (
+          drinkShow
+        )}
       </div>
     );
   }

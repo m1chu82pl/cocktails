@@ -1,10 +1,5 @@
-/* * {
-  margin:0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
 .App {
+  padding-top: 2vh;
   text-align: center;
   background-color: rgb(255, 178, 178);
 }
@@ -27,18 +22,15 @@
   align-self: center;
   flex-basis: 21%;
   height: 20vw;
-  min-height: 20vh;
+  min-height: 22vh;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
   flex-wrap: wrap;
   /* border: solid 1px black; */
-  
-  /* flex: 1 0 20%; */
   /* min-width: 150px; */
-  /* padding-bottom: 15px; */
-  /* overflow: hidden; */
+  padding-top : 3vh;
 }
 
 img {
@@ -47,6 +39,7 @@ img {
   width: 15vw;
   /* margin-top: 3vw; */
   cursor: pointer;
+  
 }
 
 p {
@@ -57,3 +50,16 @@ p {
 form {
   margin: 20px;
 }
+
+
+.drinkShow {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vh;
+  background-color: rgb(63, 134, 201);
+}
+
+
