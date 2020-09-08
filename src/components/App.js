@@ -8,21 +8,10 @@ class App extends React.Component {
   state = {
     drinkName: "",
     cocktails: [],
+    randomDrink: "",
+    randomDrinkName: "",
+    randomDrinkInstructions: "",
     error: false,
-    //   drinkID: "",
-    //   drinkName: "",
-    //   drinkIngredient1: "",
-    //   drinkIngredient2: "",
-    //   drinkIngredient3: "",
-    //   drinkIngredient4: "",
-    //   drinkIngredient5: "",
-    //   drinkMeasure1: "",
-    //   drinkMeasure2: "",
-    //   drinkMeasure3: "",
-    //   drinkMeasure4: "",
-    //   drinkMeasure5: "",
-    //   drinkInstructionsEN: "",
-    //   drinkInstructionsDE: "",
   };
 
   handleChangeInputValue = (event) => {
@@ -30,6 +19,27 @@ class App extends React.Component {
       drinkName: event.target.value,
     });
   };
+
+  componentDidMount() {
+    const URL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+
+    fetch(URL)
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        }
+        throw Error("ups!!!");
+      })
+      .then((response) => response.json())
+      .then((randomDrink) => {
+        console.log(randomDrink.drinks[0].strDrinkThumb);
+        this.setState({
+          randomDrink: randomDrink.drinks[0].strDrinkThumb,
+          randomDrinkName: randomDrink.drinks[0].strDrink,
+          randomDrinkInstructions: randomDrink.drinks[0].strInstructions,
+        });
+      });
+  }
 
   handleDrinkSubmit = (event) => {
     // console.log(this.state.drinkValue);
@@ -76,8 +86,12 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <RandomDrink />
-        "This is cocktails webside"
+        <h1>"This is cocktails webside"</h1>
+        <RandomDrink
+          randomDrink={this.state.randomDrink}
+          randomDrinkName={this.state.randomDrinkName}
+          randomDrinkInstructions={this.state.randomDrinkInstructions}
+        />
         <Form
           value={this.state.drinkName}
           change={this.handleChangeInputValue}
@@ -85,6 +99,7 @@ class App extends React.Component {
         />
         <div className="flexContainer">
           {cocktails ? <DrinksByName cocktails={cocktails} /> : cocktails}
+          {/* <DrinksByName cocktails={cocktails}/> */}
           {/* {Drinks} */}
           {/* {cocktails} */}
         </div>

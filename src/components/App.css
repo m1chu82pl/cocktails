@@ -1,8 +1,8 @@
-* {
+/* * {
   margin:0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 .App {
   text-align: center;
@@ -25,22 +25,35 @@
 .imgContainer {
   min-width: 100px;
   align-self: center;
-  flex-basis: 25%;
+  flex-basis: 21%;
+  height: 20vw;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   flex-wrap: wrap;
   /* border: solid 1px black; */
   
   /* flex: 1 0 20%; */
   /* min-width: 150px; */
-  /* padding: 15px; */
+  /* padding-bottom: 15px; */
   /* overflow: hidden; */
 }
 
 img {
   /* height: 70px; */
+  justify-content: flex-start;
   width: 15vw;
-  padding: 2vw 0 0 0;
+  /* margin-top: 3vw; */
+  cursor: pointer;
+}
+
+p {
+  cursor: pointer;
+  /* padding-bottom: 10%; */
+}
+
+form {
+  margin: 20px;
 }

@@ -7,9 +7,9 @@ const DrinksByName = props => {
   // const { returnedDrinkName } = props.drinkData
 
 const cocktails = props.cocktails.map((cocktail) => (
-      <div className="imgContainer">
+      <div className="imgContainer" key={cocktail.idDrink}>
         <img src={cocktail.strDrinkThumb} alt="drink" />
-        <div key={cocktail.idDrink}>{cocktail.strDrink}</div>
+        <p>{cocktail.strDrink}</p>
       </div>
     ));
 

@@ -2,7 +2,7 @@ import React from "react";
 
 const Form = (props) => {
   return (
-    <>
+    <div>
       <form onSubmit={props.submit}>
         <input
           type="text"
@@ -14,7 +14,7 @@ const Form = (props) => {
         />
         <button>show drink</button>
       </form>
-    </>
+    </div>
   );
 };
 
