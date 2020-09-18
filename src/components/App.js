@@ -5,10 +5,16 @@ import RandomDrink from "./RandomDrink";
 import Form from "./Form";
 import DrinkShow from "./DrinkShow";
 
+
+// how to use key/ send key to component
+// stworzyć nowy komponent a następnie
+// pobrać index i szukać ponownie
+
 class App extends React.Component {
   state = {
     drinkName: "",
     cocktails: [],
+    cocktailID: "",
     randomDrink: "",
     randomDrinkName: "",
     randomDrinkInstructions: "",
@@ -34,11 +40,11 @@ class App extends React.Component {
       })
       .then((response) => response.json())
       .then((randomDrink) => {
-        console.log(randomDrink.drinks[0].strDrinkThumb);
+        // console.log(randomDrink.drinks[0].strDrinkThumb);
         this.setState({
           randomDrink: randomDrink.drinks[0].strDrinkThumb,
           randomDrinkName: randomDrink.drinks[0].strDrink,
-          randomDrinkInstructions: randomDrink.drinks[0].strInstructions,
+          // randomDrinkInstructions: randomDrink.drinks[0].strInstructions,
         });
       });
   }
@@ -84,11 +90,12 @@ class App extends React.Component {
 
   handleClickOnRandomDrink = () => {
     this.setState({
-      drinkShow: true,
+      drinkShow: !this.state.drinkShow,
     });
   };
 
-  handleCloseDrinkShowWindow = () => {
+  handleDrinkShowWindow = () => {
+console.log();
     this.setState({
       drinkShow: !this.state.drinkShow,
     });
@@ -112,8 +119,8 @@ class App extends React.Component {
         <RandomDrink
           randomDrink={this.state.randomDrink}
           randomDrinkName={this.state.randomDrinkName}
-          randomDrinkInstructions={this.state.randomDrinkInstructions}
-          click={this.handleClickOnRandomDrink}
+          // randomDrinkInstructions={this.state.randomDrinkInstructions}
+          click={this.handleClickOnRandomDrink} 
         />
         <Form
           value={this.state.drinkName}
@@ -124,7 +131,7 @@ class App extends React.Component {
           {cocktails ? (
             <DrinksByName
               cocktails={cocktails}
-              click={this.handleCloseDrinkShowWindow}
+              click={this.handleDrinkShowWindow}
             />
           ) : (
             cocktails
@@ -136,7 +143,8 @@ class App extends React.Component {
         {drinkShow ? (
           <DrinkShow
             drinkShow={drinkShow}
-            click={this.handleCloseDrinkShowWindow}
+            clickButton={this.handleDrinkShowWindow}
+            randomDrinkInstructions={this.state.randomDrinkInstructions}
           />
         ) : (
           drinkShow

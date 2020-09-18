@@ -8,8 +8,9 @@ const DrinksByName = (props) => {
 
   const cocktails = props.cocktails.map((cocktail) => (
     <div className="imgContainer" key={cocktail.idDrink}>
-      <img src={cocktail.strDrinkThumb} onClick={props.click} alt="drink" />
+      <img src={cocktail.strDrinkThumb} onClick={props.click} alt={cocktail.strDrink} />
       <p>{cocktail.strDrink}</p>
+      {/* <p>{this.key}</p> */}
     </div>
   ));
 
